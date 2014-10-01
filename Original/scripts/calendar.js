@@ -29,13 +29,10 @@ angular.module('calendarfiddle', []).directive('calendar', ['$compile', function
 
     if (!dates || !dates.length) dates = [currentDate.getDate()];
 
-    var prevButton = '<input id="prevButton" class="customButton" type="button" value="Prev" ng-click="prevMonth(' + year + ',' + (month-1) + ')"></input>';
-    var nextButton = '<input id="nextButton" class="customButton" type="button" value="Next" ng-click="nextMonth(' + year + ',' + (month+1) + ')"></input>';
-
     var tpl = [
       '<div class="cal">',
       '<table class="cal">',
-      '<tr><th colspan="7">' + prevButton + heading + nextButton + '</th></tr>',
+      '<tr><th colspan="7"><h2>' + heading + '</h2></th></tr>',
       '<tr>'];
 
     days.forEach(function (day) {
