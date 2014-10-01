@@ -13,3 +13,7 @@ function unhighlightAll(number){
 		$( this ).css( "border", "1px solid #ddd" );
 	});
 }
+
+function showHideFilter() {
+	$( "#optionsContainer" ).toggle();
+}
