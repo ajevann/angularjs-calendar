@@ -15,4 +15,3 @@ function unhighlightAll(number){
 function showHideFilter() {
 	$( "#optionsContainer" ).toggle();
 }
-
