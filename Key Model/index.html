@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<title>Color Key Model</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="roles.js"></script>
+		<style type="text/css">
+			body {
+				font-family: "Arial Black", Gadget, sans-serif;
+			}
+
+			div.colorBox {
+				float:left;
+				position: relative;
+
+				width: 15px;
+				height: 15px;
+
+				margin-right: 5px;
+
+				border-style: solid;
+				border-width: 1px;
+				border-color: rgb(196, 196, 196);
+
+				text-align: center;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div data-ng-controller="controller">
+			<div ng-repeat="filterOption in filterOptions"> 
+				<div style="padding-bottom:5px;">
+					<div class="colorBox" style="background-color:{{filterOption.color}}; color:{{filterOption.contentColor}};">{{filterOption.content}}</div>
+					<div>{{filterOption.text}}</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

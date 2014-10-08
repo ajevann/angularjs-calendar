@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="calendarfiddle">
+	
+	<head>
+		<title>Calendar Model</title>
+		<script type="text/javascript" src="scripts/angular.js"></script>
+		<script type="text/javascript" src="scripts/builder.js"></script>
+		<script type="text/javascript" src="scripts/calendar.js"></script>
+		<script type="text/javascript" src="scripts/actions.js"></script>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+
+		<link rel="stylesheet" href="styles/calendar.css">
+		
+		<style type="text/css">
+			body {
+				overflow: hidden;
+				min-width: 800px;
+			}
+		</style>
+	</head>
+	<body>
+	    <div data-ng-controller="calendarcontroller">
+			<div class="calendar-holder" data-calendar></div>
+		</div>
+	</body>
+</html>
