@@ -1,9 +1,39 @@
+var app = angular.module('calendarfiddle', []);
+
+app.directive('calendar', ['$compile', function ($compile) {
+  
+  return {
+    restrict: 'A',
+    replace: true,
+    template: getTemplate(9, 2014, [])
+  };
+}]);
+
+app.directive('nextButton', function () {
+    return { restrict: 'EA', replace: true, scope: { eventHandler: '&ngClick' },
+        template: '<div id="holder"><button data-ng-click="eventHandler()">Next</button></div>'
+    };
+});
+  
+app.directive('prevButton', function () {
+    return { restrict: 'EA', replace: true, scope: { eventHandler: '&ngClick' },
+        template: '<div id="holder"><button data-ng-click="eventHandler()">Previous</button></div>'
+    };
+});
+
+app.controller('calendarcontroller', ['$scope', function ($scope) {
+    $scope.prev = function (msg) {
+        $(".calendar-holder").empty();
+        $(".calendar-holder").append(getTemplate(8, 2014, []));
+    };
+    $scope.next = function (msg) {
+        $(".calendar-holder").empty();
+        $(".calendar-holder").append(getTemplate(10, 2014, []));
+    };
+}]);
+
 var monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 var days = ['s', 'm', 't', 'w', 't', 'f', 's'];
-
-var currentDate = new Date();
-document.body.innerHTML += getTemplate(currentDate.getMonth(), currentDate.getYear(), []);
-console.log('hit');
 
 var isLeapYear = function (year) {
   return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
@@ -18,6 +48,8 @@ var formatDateHeading = function (date) {
   return m.charAt(0).toUpperCase() + m.slice(1) + ' ' + date.getFullYear();
 };
 
+var currentDate = new Date();
+
 function getTemplate(month, year, dates) {
 
   var month = ((isNaN(month) || month == null) ? currentDate.getMonth() + 1 : month) - 1,
@@ -29,13 +61,14 @@ function getTemplate(month, year, dates) {
 
   if (!dates || !dates.length) dates = [currentDate.getDate()];
 
-  var prevButton = '<input id="prevButton" class="customButton" type="button" value="Prev" ng-click="prevMonth(' + year + ',' + (month-1) + ')"></input>';
-  var nextButton = '<input id="nextButton" class="customButton" type="button" value="Next" ng-click="nextMonth(' + year + ',' + (month+1) + ')"></input>';
+    //var prevButton = '<prev-button data-ng-click="prev()"></prev-button>';
+    //var nextButton = '<next-button data-ng-click="next()"></next-button>';
+
 
   var tpl = [
     '<div class="cal">',
     '<table class="cal">',
-    '<tr><th colspan="7">' + prevButton + heading + nextButton + '</th></tr>',
+    '<tr><th colspan="7"><h2>' + heading + '</h2></th></tr>',
     '<tr>'];
 
   days.forEach(function (day) {
@@ -69,21 +102,3 @@ function getTemplate(month, year, dates) {
 
   return tpl.join('');
 }
-
-
-function prevMonth(month, year) {
-  var elem = document.getElementById("cal");
-  elem.parentNode.removeChild(elem);
-
-  document.body.innerHTML += getTemplate(month, year, []);
-}
-
-function nextMonth(month, year) {
-  var elem = document.getElementById("cal");
-  elem.parentNode.removeChild(elem);
-  
-  document.body.innerHTML += getTemplate(month, year, []);
-}
-
-
-

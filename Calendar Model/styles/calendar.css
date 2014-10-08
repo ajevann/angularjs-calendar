@@ -58,8 +58,9 @@ div.cal-change-request-container {
 
 div.cal-change-request-item { 	
 	border: 1px solid #ddd;
-	
+	font-size:0.75em;
 	text-align:left;
+	background-color: 
 }
 
 a.request-link {
