@@ -30,11 +30,20 @@ myModule.factory('mySharedService', function($rootScope) {
     return sharedService;
 });
 
-myModule.directive('myComponent', function(mySharedService) {
+myModule.directive('myComponent', function(mySharedService, $rootScope) {
+    var messageToDeliver = 'blank';
+    
+    var getTemplate = function($compile, mess) {
+        console.log($rootScope.heading);
+        return '<p>{{heading}}</p>';
+    }
+
     return {
-        restrict: 'E',
+        restrict: 'AE',
         controller: function($scope, $attrs, mySharedService) {
             $scope.$on('handleBroadcast', function() {
+                messageToDeliver = mySharedService.message;
+                console.log(messageToDeliver  + ' ' + mySharedService.message);
                 $scope.message = 'Directive: ' + mySharedService.message;
             });
         },
@@ -42,11 +51,6 @@ myModule.directive('myComponent', function(mySharedService) {
         template: getTemplate()
     };
 });
-
-function getTemplate() {
-    return '<input>';
-}
-
 
 function ControllerZero($scope, $rootScope, sharedService) {
     $scope.handleClick = function(msg) {
@@ -62,7 +66,10 @@ function ControllerZero($scope, $rootScope, sharedService) {
     }
 
     var currentDate  = new Date();
-    $rootScope.heading = currentDate.getMonth() + ' ' +  currentDate.getYear();
+    $rootScope.month = 'September';
+    $rootScope.year = '2014';
+
+    $rootScope.heading = $rootScope.month + ' ' + $rootScope.year;
 
     $scope.$on('handleBroadcast', function() {
         $scope.message = sharedService.message;
