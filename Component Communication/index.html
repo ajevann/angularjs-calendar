@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+	
+	<head>
+		<title>Communications Model</title>
+		<script type="text/javascript" src="scripts/angular.js"></script>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="scripts/scripts.js"></script>
+
+	</head>
+	<body>
+		
+		<div ng-controller="ControllerZero">
+			<p>{{heading}}</p>
+			<button ng-click="handleClick();">BROADCAST</button>
+			<button ng-click="prev();">PREVIOUS</button>
+			<button ng-click="next();">NEXT</button>
+		</div>
+		<div ng-controller="ControllerOne">
+			<input ng-model="message" >
+		</div>
+		<div ng-controller="ControllerTwo">
+			<input ng-model="message" >
+		</div>
+		<my-component ng-model="message"></my-component>
+
+	</body>
+</html>

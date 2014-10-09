@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<title>CheckBox Model</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="my-app.js"></script>
+		<script type="text/javascript" src="checklist-model.js"></script>
+
+		<style type="text/css">
+			body {
+				font-family: "Arial Black", Gadget, sans-serif;
+			}
+
+			div.colorBox {
+				float:left;
+				position: relative;
+
+				width: 15px;
+				height: 15px;
+
+				margin-right: 5px;
+
+				border-style: solid;
+				border-width: 1px;
+				border-color: rgb(196, 196, 196);
+
+				text-align: center;
+			}
+
+		</style>
+
+	</head>
+	<body data-ng-controller="mastercontroller">
+		<p>{{user.filterOptions}}</p>
+
+		<div>
+			<div ng-repeat="colorKey in colorKeys"> 
+				<div style="padding-bottom:5px;">
+					<div class="colorBox" style="background-color:{{colorKey.color}}; color:{{colorKey.contentColor}};">{{colorKey.content}}</div>
+					<div>{{colorKey.text}}</div>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<div>
+			<label ng-repeat="filterOption in filterOptions">
+				<div>
+					<input type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id"> {{filterOption.text}} </input>
+				</div>
+			</label>
+		</div>
+
+
+	</body>
+</html>
