@@ -1,4 +1,4 @@
-var app = angular.module('calendar', []); 
+var app = angular.module('calendarfiddle', []);
 
 app.directive('calendar', ['$compile', function ($compile) {
   return {
@@ -35,14 +35,14 @@ function getTemplate(month, year, dates) {
   var monthLength = daysInMonth(firstDay);
   var heading = formatDateHeading(firstDay);
 
-  if (!dates || !dates.length) dates = [currentDate.getDate()];
+  setMonthText(heading);
 
-  var nextButton = '<button ng-click="loadNextMonth()"></button>';
+  if (!dates || !dates.length) dates = [currentDate.getDate()];
 
   var tpl = [
     '<div class="cal">',
     '<table class="cal">',
-    '<tr><th colspan="7"><h2>{{currentDate}}</h2></th></tr>',
+    '<tr><th colspan="7"><h2>' + heading + '</h2></th></tr>',
     '<tr>'];
 
   days.forEach(function (day) {

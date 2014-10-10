@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="calendarfiddle">
+<html ng-app="calendar">
 	
 	<head>
 		<title>Calendar Model</title>
@@ -18,18 +18,7 @@
 			}
 		</style>
 	</head>
-	<body data-ng-controller="mastercontroller">
-		<div>
-			<table>
-				<tr>
-					<td><button data-ng-click="prev()">Previous</button></td>
-					<td>Month {{monthText}}</td>
-					<td><button data-ng-click="next()">Next</button></td>
-				</tr>
-			</table>
-		</div>
-	    <div>
-			<div class="calendar-holder"></div>
-		</div>
+	<body ng-controller"MasterController">
+		<div id="calendar"></div>		
 	</body>
 </html>

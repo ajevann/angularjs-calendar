@@ -1,4 +1,5 @@
 var myModule = angular.module('myModule', []);
+var DATE = '';
 
 myModule.factory('mySharedService', function($rootScope) {
     var sharedService = {};
@@ -12,12 +13,14 @@ myModule.factory('mySharedService', function($rootScope) {
 
     sharedService.prevMonth = function() {
         this.message = 'PREV';
+        DATE = 'THISPREVDATE';
         $rootScope.heading = 'Prev';
         $rootScope.$broadcast('handleBroadcast');
     }
 
     sharedService.nextMonth = function() {
         this.message = 'NEXT';
+        DATE = 'THISNEXTDATE';
         $rootScope.heading = 'Next';  
         $rootScope.$broadcast('handleBroadcast');
     }
@@ -34,7 +37,7 @@ myModule.directive('myComponent', function(mySharedService, $rootScope) {
     var messageToDeliver = 'blank';
     
     var getTemplate = function($compile, mess) {
-        console.log($rootScope.heading);
+        console.log('--template ' + DATE);
         return '<p>{{heading}}</p>';
     }
 
@@ -43,7 +46,7 @@ myModule.directive('myComponent', function(mySharedService, $rootScope) {
         controller: function($scope, $attrs, mySharedService) {
             $scope.$on('handleBroadcast', function() {
                 messageToDeliver = mySharedService.message;
-                console.log(messageToDeliver  + ' ' + mySharedService.message);
+                console.log(DATE);
                 $scope.message = 'Directive: ' + mySharedService.message;
             });
         },
