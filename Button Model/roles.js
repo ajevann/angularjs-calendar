@@ -33,41 +33,42 @@ myApp.controller('controller', function($scope) {
     };
 });
 
-function nextMonth() {
+function prevMonth() {
+    var month = _globalDate.getMonth - 1;
+    var year = _globalDate.getYear;
+
+    _globalDate = new Date(year, month, 1);
+    _globalDateFormatted = formatDateHeading(_globalDate);
+    
     return _globalDateFormatted;
+
 }
 
+function nextMonth() {
+    var month = _globalDate.getMonth + 1;
+    var year = _globalDate.getYear;
+
+    _globalDate = new Date(year, month, 1);
+    _globalDateFormatted = formatDateHeading(_globalDate);
+    
+    return _globalDateFormatted;
+}
 
 myApp.directive('directive', function(){
     return function(scope, element, attrs) {
 
         scope.$on('prev', function() {
+            scope.heading = prevMonth();
+            
             element.empty();
-            element.append('<div>September ' + _globalDate + ' 2014</div>');
-            _globalDateFormatted = "SECOND";
+            element.append('<div>' + scope.heading + '</div>');
         });
 
         scope.$on('next', function() {
+            scope.heading = nextMonth();
+            
             element.empty();
-            element.append('<div>November ' + nextMonth() + ' 2014</div>');
+            element.append('<div>' + scope.heading + '</div>');
         });
     };
 });
-
-myApp.directive('calendardirective', function(){
-    return function(scope, element, attrs) {
-
-        scope.$on('prev', function() {
-            element.empty();
-            element.append('<div>September ' + _globalDate + ' 2014</div>');
-            _globalDateFormatted = "SECOND";
-        });
-
-        scope.$on('next', function() {
-            element.empty();
-            element.append('<div>November ' + nextMonth() + ' 2014</div>');
-        });
-    };
-});
-
-
