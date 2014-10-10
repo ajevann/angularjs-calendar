@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<title>Color Key Model</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="roles.js"></script>
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="controller">
+			<table>
+				<tr>
+					<td><button ng-click="prev()">Previous</button></td>
+					<td><div directive>{{heading}}</div></td>
+					<td><button ng-click="next()">Next</button></td>
+				</tr>
+			</table>
+			<div calendardirective>{{heading}}</div>
+		</div>
+	</body>
+</html>
