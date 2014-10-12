@@ -2,7 +2,6 @@ var myApp = angular.module('myApp', []);
 
 var _globalDate = new Date();
 
-
 var monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 var days = ['s', 'm', 't', 'w', 't', 'f', 's'];
 
@@ -34,19 +33,18 @@ myApp.controller('controller', function($scope) {
 });
 
 function prevMonth() {
-    var month = _globalDate.getMonth - 1;
-    var year = _globalDate.getYear;
+    var month = (_globalDate.getMonth() == 0) ? 11 : _globalDate.getMonth() - 1;
+    var year = (month == 11) ? _globalDate.getFullYear() - 1 : _globalDate.getFullYear();
 
     _globalDate = new Date(year, month, 1);
     _globalDateFormatted = formatDateHeading(_globalDate);
     
     return _globalDateFormatted;
-
 }
 
 function nextMonth() {
-    var month = _globalDate.getMonth + 1;
-    var year = _globalDate.getYear;
+    var month = (_globalDate.getMonth() == 11) ? 0 : _globalDate.getMonth() + 1;
+    var year = (month == 0) ? _globalDate.getFullYear() + 1 : _globalDate.getFullYear();
 
     _globalDate = new Date(year, month, 1);
     _globalDateFormatted = formatDateHeading(_globalDate);
