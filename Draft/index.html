@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="app">
 	<head>
-		<title>CheckBox Model</title>
+		<title>Draft</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 		<script type="text/javascript" src="scripts/my-app.js"></script>
 		<script type="text/javascript" src="scripts/checklist-model.js"></script>
+		<script type="text/javascript" src="scripts/actions.js"></script>
+		<script type="text/javascript" src="scripts/builder.js"></script>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
 
 		<style type="text/css">
 			body {
-				font-family: "Arial Black", Gadget, sans-serif;
+				/*font-family: "Arial Black", Gadget, sans-serif;*/
 			}
 
 			div.colorBox {
@@ -33,22 +36,31 @@
 	<body data-ng-controller="mastercontroller">
 		<p>{{user.filterOptions}}</p>
 
-		<div>
+		<div style="float:left;">
 			<div ng-repeat="colorKey in colorKeys"> 
 				<div style="padding-bottom:5px;">
 					<div class="colorBox" style="background-color:{{colorKey.color}}; color:{{colorKey.contentColor}};">{{colorKey.content}}</div>
 					<div>{{colorKey.text}}</div>
 				</div>
 			</div>
-		</div>
-		<br/>
-		<br/>
-		<div>
+			<br/>
+			<br/>
 			<label ng-repeat="filterOption in filterOptions">
 				<div>
 					<input type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id"> {{filterOption.text}} </input>
 				</div>
 			</label>
+		</div>
+
+		<div style="float:right;">			
+			<table>
+				<tr>
+					<td><button ng-click="prev()">Previous</button></td>
+					<td><div>{{heading}}</div></td>
+					<td><button ng-click="next()">Next</button></td>
+				</tr>
+			</table>
+			<div directive>{{heading}}</div>
 		</div>
 
 

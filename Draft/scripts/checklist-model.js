@@ -57,14 +57,10 @@ angular.module('checklist-model', [])
     // watch UI checked change
     scope.$watch('checked', function(newValue, oldValue) {
       
-      console.log('CHECKED ' + newValue.toString() + ' ' + oldValue.toString());
-
       if (newValue === oldValue) { 
         return;
       } 
       var current = getter(scope.$parent);
-
-      console.log(current.toString() + ' ' + value.toString());
      
       if (newValue === true) {
         setter(scope.$parent, add(current, value));
