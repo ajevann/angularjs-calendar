@@ -8,7 +8,7 @@ function highlightAll(number){
 function unhighlightAll(number){
 	var id = '.' + number;
 	$(id).each(function( i ){
-		$( this ).css( "border", "1px solid #ddd" );
+		$( this ).css( "border", "3px solid #ddd" );
 	});
 }
 

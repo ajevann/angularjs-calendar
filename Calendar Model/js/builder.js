@@ -24,12 +24,9 @@ function loadDailyRequests(year, month, day) {
 			var color = setColor(item_state);
 
 			var item = 
-				'<div class="cal-change-request-item ' + item_number + '" ' + 
-				'style="background-color:' + color + ';"' + 
-				'onmouseover="highlightAll(\'' + item_number.toString() + '\')" ' + 
-				'onmouseout="unhighlightAll(\'' + item_number.toString() + '\')">' + 
-				'<a class="request-link" href="' + item_sysId + '"><strong>' + 
-				item_number + '</strong> (' + item_state + ') ' + item_type + '</a></div>';
+				'<div class="cal-change-request-item ' + item_number + '" style="background-color:' + color + ';" onmouseover="highlightAll(\'' + 
+					item_number.toString() + '\')"  onmouseout="unhighlightAll(\'' + item_number.toString() + '\')"><a class="request-link" href="' + 
+					item_sysId + '"><strong>' + item_number + '</strong> (' + item_state + ') ' + item_type + '</a></div>';
 
 			div = div.concat(item);
 		}

@@ -29,16 +29,14 @@ app.directive('directive', function(){
       });
 
       scope.$on('next', function() {
-        console.log('a ' + _globalDate);
         scope.heading = nextMonth();
-        console.log('b ' + _globalDate);
         
         element.empty();
         element.append('<div>' + getTemplate(_globalDate.getMonth(), _globalDate.getFullYear(), []) + '</div>');
       });
     },
 
-    template: '<div>' + getTemplate(null, null, []) + '</div>'
+    template: '<div>' + getTemplate(_globalDate.getMonth(), _globalDate.getFullYear(), []) + '</div>'
   };
 });
 
@@ -66,6 +64,9 @@ function prevMonth() {
     var year = (month == 11) ? _globalDate.getFullYear() - 1 : _globalDate.getFullYear();
 
     _globalDate = new Date(year, month, 1);
+    
+    console.log('prev : ' + month + ' ' + year + ' ' + _globalDate.toString());
+
     _globalDateFormatted = formatDateHeading(_globalDate);
     
     return _globalDateFormatted;
@@ -76,6 +77,9 @@ function nextMonth() {
     var year = (month == 0) ? _globalDate.getFullYear() + 1 : _globalDate.getFullYear();
 
     _globalDate = new Date(year, month, 1);
+
+    console.log('next : ' + month + ' ' + year + ' ' + _globalDate.toString());
+
     _globalDateFormatted = formatDateHeading(_globalDate);
     
     return _globalDateFormatted;
@@ -87,12 +91,14 @@ function getTemplate(month, year, dates) {
 
   console.log('a : ' + currentDate.getMonth() + ' ' + currentDate.getFullYear());
 
-  var month = ((isNaN(month) || month == null) ? currentDate.getMonth() + 1 : month) - 1;
+  var month = ((isNaN(month) || month == null) ? currentDate.getMonth() + 1 : month);
   var year = (isNaN(year) || year == null) ? currentDate.getFullYear() : year;
   var firstDay = new Date(year, month, 1);
   var startDay = firstDay.getDay();
   var monthLength = daysInMonth(firstDay);
   var heading = formatDateHeading(firstDay);
+
+  _globalDate = firstDay;
 
   console.log('b : ' + month + ' ' + year);
 
@@ -101,7 +107,7 @@ function getTemplate(month, year, dates) {
   var tpl = [
     '<div class="cal">',
     '<table class="cal">',
-    '<tr><th colspan="7"><h2>' + heading + '</h2></th></tr>',
+    //'<tr><th colspan="7"><h2>' + heading + '</h2></th></tr>',
     '<tr>'];
 
   days.forEach(function (day) {
