@@ -2,7 +2,10 @@ var raw_data = "2014-08-01 04:00:00,2014-08-01 05:22:22,CHG010934,requested,Awai
 var test_data = loadData(raw_data);
 
 function loadDailyRequests(year, month, day) {
-	var currDate = new Date(year, month, day);
+	var currDate = new Date(year, month + 1, day);
+
+	//console.log('c : ' + currDate.toString());
+
 	var div = '<div class="cal-change-request-container">';
 
 	var i = 0;

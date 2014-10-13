@@ -1,51 +1,8 @@
-var app = angular.module("app", ["checklist-model"]);
+var app = angular.module("app", []);
+
+var _globalDate = new Date();
 
 app.controller('mastercontroller', ['$scope', '$rootScope', function($scope, $rootScope) {
-
-  $scope.colorKeys = [
-    {text:'Informational', color:'#FFF380'},
-    {text:'Draft', color:'#FFFFFF'},
-    {text:'Approved', color:'#4AA02C'},
-    {text:'Closed', color:'#736F6E'},
-    {text:'Awaiting Approval', color:'#F88017'},
-    {text:'RCW', color:'#E73131'},
-    {text:'Change spanning multiple days', color:'#FFFFFF', content:'*', contentColor:'black'},
-    {text:'Emergency Change', color:'#FFFFFF', content:'R', contentColor:'red'} 
-  ];
-
-  $scope.filterOptions = [
-    {id:'BND', text:'Brand'},
-    {id:'COM', text:'Commerce'},
-    {id:'FND', text:'Foundation'},
-    {id:'SPT', text:'Nike'},
-    {id:'TOI', text:'Tech Ops Infrastructure'},
-    {id:'TOT', text:'Tech Ops Tools'},
-    {id:'NORMAL', text:'Normal'},
-    {id:'EMERGENCY', text:'Emergency'},
-    {id:'INFO', text:'Information'},
-    {id:'ROUTINE', text:'Routine'},
-    {id:'ABT', text:'AB Testing/TMS'},
-    {id:'ROC', text:'Recurring Operational Changes'},
-    {id:'RCW', text:'RCWs'},
-    {id:'CLSD', text:'Closed'}
-  ];
-
-  $scope.user = {
-    filterOptions: ['BND', 'CLSD']
-  };
-
-  $scope.checkAll = function() {
-    $scope.user.filterOptions = $scope.filterOptions.map(function(item) { return item.id; });
-  };
-
-  $scope.uncheckAll = function() {
-    $scope.user.filterOptions = [];
-  };
-
-  $scope.checkFirst = function() {
-    $scope.user.filterOptions.splice(0, $scope.user.filterOptions.length); 
-    $scope.user.filterOptions.push(1);
-  };
   
   $scope.heading = _globalDateFormatted.toString();
 
@@ -56,30 +13,35 @@ app.controller('mastercontroller', ['$scope', '$rootScope', function($scope, $ro
   $scope.prev = function() {
     $scope.$emit('prev');
   };
+
 }]);
 
 app.directive('directive', function(){
-    return function(scope, element, attrs) {
+  return {
+    replace: true,
+    link : function(scope, element, attrs) {
 
-        scope.$on('prev', function() {
-            scope.heading = prevMonth();
-            
-            element.empty();
-            element.append('<div>' + getTemplate(_globalDate.getMonth(), _globalDate.getFullYear(), [], scope) + '</div>');
-        });
+      scope.$on('prev', function() {
+        scope.heading = prevMonth();
+        
+        element.empty();
+        element.append('<div>' + getTemplate(_globalDate.getMonth(), _globalDate.getFullYear(), []) + '</div>');
+      });
 
-        scope.$on('next', function() {
-          console.log('a ' + _globalDate);
-          scope.heading = nextMonth();
-          console.log('b ' + _globalDate);
-          
-          element.empty();
-          element.append('<div>' + getTemplate(_globalDate.getMonth(), _globalDate.getFullYear(), [], scope) + '</div>');
-        });
-    };
+      scope.$on('next', function() {
+        console.log('a ' + _globalDate);
+        scope.heading = nextMonth();
+        console.log('b ' + _globalDate);
+        
+        element.empty();
+        element.append('<div>' + getTemplate(_globalDate.getMonth(), _globalDate.getFullYear(), []) + '</div>');
+      });
+    },
+
+    template: '<div>' + getTemplate(null, null, []) + '</div>'
+  };
 });
 
-var _globalDate = new Date();
 
 var monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 var days = ['s', 'm', 't', 'w', 't', 'f', 's'];
@@ -119,9 +81,11 @@ function nextMonth() {
     return _globalDateFormatted;
 }
 
-function getTemplate(month, year, dates, scope) {
+function getTemplate(month, year, dates) {
 
   var currentDate = new Date();
+
+  console.log('a : ' + currentDate.getMonth() + ' ' + currentDate.getFullYear());
 
   var month = ((isNaN(month) || month == null) ? currentDate.getMonth() + 1 : month) - 1;
   var year = (isNaN(year) || year == null) ? currentDate.getFullYear() : year;
@@ -130,12 +94,14 @@ function getTemplate(month, year, dates, scope) {
   var monthLength = daysInMonth(firstDay);
   var heading = formatDateHeading(firstDay);
 
+  console.log('b : ' + month + ' ' + year);
+
   if (!dates || !dates.length) dates = [currentDate.getDate()];
 
   var tpl = [
     '<div class="cal">',
     '<table class="cal">',
-    '<tr><th colspan="7"><h2>' + heading + ' | ' + scope.heading + '</h2></th></tr>',
+    '<tr><th colspan="7"><h2>' + heading + '</h2></th></tr>',
     '<tr>'];
 
   days.forEach(function (day) {
