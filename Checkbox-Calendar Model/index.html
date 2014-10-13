@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<title>Draft</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="js/my-app.js"></script>
+		<script type="text/javascript" src="js/actions.js"></script>
+		<script type="text/javascript" src="js/builder.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="roles.js"></script>
+		<script type="text/javascript" src="checklist-model.js"></script>
+
+		<style type="text/css">
+		</style>
+
+	</head>
+	<body data-ng-controller="mastercontroller" >
+		<div>
+			<label ng-repeat="filterOption in filterOptions">
+				<input type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id" ng-checked> {{filterOption.text}} </input>				
+			</label>
+			<p>{{user.filterOptions}}</p>
+		</div>
+
+		<div>
+			<table>
+				<tr>
+					<td><button ng-click="prev()">Previous</button></td>
+					<td><div>{{heading}}</div></td>
+					<td><button ng-click="next()">Next</button></td>
+				</tr>
+			</table>
+			<div directive data-ng-init="init()"></div>
+		</div>
+
+	</body>
+</html>
