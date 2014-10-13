@@ -1,24 +1,48 @@
 <!DOCTYPE html>
-<html ng-app="calendar">
-	
+<html ng-app="app">
 	<head>
-		<title>Calendar Model</title>
-		<script type="text/javascript" src="scripts/angular.js"></script>
-		<script type="text/javascript" src="scripts/builder.js"></script>
-		<script type="text/javascript" src="scripts/calendar.js"></script>
-		<script type="text/javascript" src="scripts/actions.js"></script>
-		<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+		<title>Draft</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="js/my-app.js"></script>
+		<script type="text/javascript" src="js/actions.js"></script>
+		<script type="text/javascript" src="js/builder.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 
-		<link rel="stylesheet" href="styles/calendar.css">
-		
 		<style type="text/css">
 			body {
-				overflow: hidden;
-				min-width: 800px;
+				/*font-family: "Arial Black", Gadget, sans-serif;*/
 			}
+
+			div.colorBox {
+				float:left;
+				position: relative;
+
+				width: 15px;
+				height: 15px;
+
+				margin-right: 5px;
+
+				border-style: solid;
+				border-width: 1px;
+				border-color: rgb(196, 196, 196);
+
+				text-align: center;
+			}
+
 		</style>
+
 	</head>
-	<body ng-controller"MasterController">
-		<div id="calendar"></div>		
+	<body data-ng-controller="mastercontroller" >
+		<div>
+			<table>
+				<tr>
+					<td><button ng-click="prev()">Previous</button></td>
+					<td><div>{{heading}}</div></td>
+					<td><button ng-click="next()">Next</button></td>
+				</tr>
+			</table>
+			<div directive data-ng-init="init()">{{heading}}</div>
+		</div>
+
 	</body>
 </html>

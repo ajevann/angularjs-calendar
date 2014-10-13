@@ -67,6 +67,8 @@ angular.module('checklist-model', [])
       } else {
         setter(scope.$parent, remove(current, value));
       }
+
+      console.log(getter(scope.$parent).toString() + ' clicked');
     });
 
     // watch original model change
