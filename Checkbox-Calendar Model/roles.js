@@ -2,9 +2,10 @@ var app = angular.module("app", ["checklist-model"]);
 
 var _globalDate = new Date();
 
-app.controller('mastercontroller', ['$scope', '$rootScope', function($scope, $rootScope) {
+app.controller('controller', ['$scope', '$rootScope', function($scope, $rootScope) {
   
   $scope.heading = _globalDateFormatted.toString();
+  $scope.toShow = "";
 
   $scope.next = function() {
     $scope.$emit('next');
@@ -14,32 +15,42 @@ app.controller('mastercontroller', ['$scope', '$rootScope', function($scope, $ro
     $scope.$emit('prev');
   };
 
+  $scope.filterClick = function(variable) {
+    
+    $scope.toShow = variable;
+    $scope.$emit('show');
+    //alert(variable);
+  }
+
   $scope.filterOptions = [
-    {id:'BND', text:'Brand'},                           //Division
-    {id:'COM', text:'Commerce'},                        //Division
-    {id:'FND', text:'Foundation'},                      //Division
-    {id:'SPT', text:'Nike'},                            //Division
-    {id:'TOI', text:'Tech Ops Infrastructure'},         //Division
-    {id:'TOT', text:'Tech Ops Tools'},                  //Division
-    {id:'Normal', text:'Normal'},                       //Change Type
-    {id:'Emergency', text:'Emergency'},                 //Change Type
-    {id:'Information', text:'Information'},             //Change Type
-    {id:'Routine', text:'Routine'},                     //Change Type
-    {id:'ABT', text:'AB Testing/TMS'},                  //Other
-    {id:'ROC', text:'Recurring Operational Changes'},   //Other
-    {id:'RCW', text:'RCWs'},                            //Other
-    {id:'CLSD', text:'Closed'}                          //Other
+    {id:'Brand', text:'Brand'},
+    {id:'Commerce', text:'Commerce'},
+    {id:'Foundation', text:'Foundation'},
+    {id:'Nike', text:'Nike'},
+    {id:'Tech-Ops-Infrastructure', text:'Tech Ops Infrastructure'},
+    {id:'Tech-Ops-Tools', text:'Tech Ops Tools'},
+    {id:'Normal', text:'Normal'},
+    {id:'Emergency', text:'Emergency'},
+    {id:'Information', text:'Information'},
+    {id:'Routine', text:'Routine'},
+    {id:'AB-Testing/TMS', text:'AB Testing/TMS'},
+    {id:'Recurring-Operational-Changes', text:'Recurring Operational Changes'},
+    {id:'RCWs', text:'RCWs'},
+    {id:'Closed', text:'Closed'}
   ];
-  
+
   $scope.user = {
-    filterOptions: ['BND', 'CLSD']
+    filterOptions: []
   };
+  
   $scope.checkAll = function() {
     $scope.user.filterOptions = $scope.filterOptions.map(function(item) { return item.id; });
   };
+  
   $scope.uncheckAll = function() {
     $scope.user.filterOptions = [];
   };
+  
   $scope.checkFirst = function() {
     $scope.user.filterOptions.splice(0, $scope.user.filterOptions.length); 
     $scope.user.filterOptions.push(1);
@@ -51,6 +62,10 @@ app.directive('directive', function(){
   return {
     replace: true,
     link : function(scope, element, attrs) {
+
+      scope.$on('show', function() {
+        $('.' + scope.toShow).toggle();
+      });
 
       scope.$on('prev', function() {
         scope.heading = prevMonth();
