@@ -23,14 +23,14 @@ app.controller('controller', ['$scope', '$rootScope', function($scope, $rootScop
   }
 
   $scope.filterKeys = [
-    {text:'Informational', color:'#FFF380'},
-    {text:'Draft', color:'#FFFFFF'},
-    {text:'Approved', color:'#4AA02C'},
-    {text:'Closed', color:'#736F6E'},
-    {text:'Awaiting Approval', color:'#F88017'},
-    {text:'RCW', color:'#E73131'},
-    {text:'Change spanning multiple days', color:'#FFFFFF', content:'*', contentColor:'black'},
-    {text:'Emergency Change', color:'#FFFFFF', content:'R', contentColor:'red'} 
+    {id:'Informational', text:'Informational', color:'#FFF380'},
+    {id:'Draft', text:'Draft', color:'#FFFFFF'},
+    {id:'Approved', text:'Approved', color:'#4AA02C'},
+    {id:'Closed', text:'Closed', color:'#736F6E'},
+    {id:'Awaiting-Approval', text:'Awaiting Approval', color:'#F88017'},
+    {id:'RCW', text:'RCW', color:'#E73131'},
+    {id:'Change-spanning-multiple-days', text:'Change spanning multiple days', color:'#FFFFFF', content:'*', contentColor:'black'},
+    {id:'Emergency-Change', text:'Emergency Change', color:'#FFFFFF', content:'R', contentColor:'red'} 
   ];
 
   $scope.filterOptions = [

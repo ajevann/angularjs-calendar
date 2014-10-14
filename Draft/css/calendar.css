@@ -28,6 +28,7 @@ div.cal div.cal-day {
 	padding: 6px;
 	cursor: pointer;
 	border: 1px solid transparent;
+	min-height: 100px;
 }
 
 div.cal div.cal-highlight {

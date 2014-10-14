@@ -26,11 +26,14 @@
 				<div class="containerKey">
 					<div ng-repeat="filterKey in filterKeys"> 
 						<div class="colorKey" style="padding-bottom:5px;">
-							<div class="colorBox" style="background-color:{{filterKey.color}}; color:{{filterKey.contentColor}};">{{filterKey.content}}</div>
+							<div class="colorBox" ng-click="filterClick(filterKey.id)" style="background-color:{{filterKey.color}}; color:{{filterKey.contentColor}};">{{filterKey.content}}</div>
 							<div>{{filterKey.text}}</div>
 						</div>
 					</div>
 				</div>
+
+			</br>
+			</br>
 
 				<div class="containerFilter">
 					<label ng-repeat="filterOption in filterOptions">
