@@ -1,0 +1,19 @@
+.colorKey {
+	margin-bottom:10px;
+}
+
+div.colorBox {
+	float:left;
+	position: relative;
+
+	width: 15px;
+	height: 15px;
+
+	margin-right: 5px;
+
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(196, 196, 196);
+
+	text-align: center;
+}
