@@ -14,10 +14,12 @@
 		</style>
 
 	</head>
-	<body data-ng-controller="mastercontroller" >
+	<body data-ng-controller="controller" >
 		<div>
 			<label ng-repeat="filterOption in filterOptions">
-				<input type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id" ng-checked> {{filterOption.text}} </input>				
+				<div>
+					<input type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id" ng-change="filterClick(filterOption.id)"> {{filterOption.text}} </input>
+				</div>
 			</label>
 			<p>{{user.filterOptions}}</p>
 		</div>
@@ -32,6 +34,7 @@
 			</table>
 			<div directive data-ng-init="init()"></div>
 		</div>
+
 
 	</body>
 </html>
