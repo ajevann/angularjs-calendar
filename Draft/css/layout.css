@@ -1,0 +1,28 @@
+body {
+	margin: 20px;
+}
+
+.mainPane {
+
+}
+
+.leftPane {
+    position:absolute;
+    left:0px;
+	float: left;
+}
+
+.rightPane {
+    position:absolute;
+    left:205px;
+	float: right;
+}
+
+.containerFilter {
+	width:200px;
+}
+
+.containerCalendar {
+	width:100%;
+	height:100%;
+}

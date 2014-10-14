@@ -7,56 +7,57 @@
 		<script type="text/javascript" src="js/actions.js"></script>
 		<script type="text/javascript" src="js/builder.js"></script>
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/checklist-model.js"></script>
+		<!-- <link rel="stylesheet" href="css/bootstrap.css"></link> -->
+		<link rel="stylesheet" href="css/calendar.css"></link>
+		<link rel="stylesheet" href="css/layout.css"></link>
+		<link rel="stylesheet" href="css/filter.css"></link>
+		<link rel="stylesheet" href="css/key.css"></link>
+		<link rel="stylesheet" href="css/heading.css"></link>
+		<link rel="stylesheet" href="css/other.css"></link>
 
-		<style type="text/css">
-			body {
-				/*font-family: "Arial Black", Gadget, sans-serif;*/
-			}
-
-			div.colorBox {
-				float:left;
-				position: relative;
-
-				width: 15px;
-				height: 15px;
-
-				margin-right: 5px;
-
-				border-style: solid;
-				border-width: 1px;
-				border-color: rgb(196, 196, 196);
-
-				text-align: center;
-			}
-
-		</style>
+		<style type="text/css"></style>
 
 	</head>
-	<body data-ng-controller="mastercontroller">
-		<p>{{user.filterOptions}}</p>
-		<div>
-			<div ng-repeat="colorKey in colorKeys"> 
-				<div style="padding-bottom:5px;">
-					<div class="colorBox" style="background-color:{{colorKey.color}}; color:{{colorKey.contentColor}};">{{colorKey.content}}</div>
-					<div>{{colorKey.text}}</div>
+	<body data-ng-controller="controller">
+		<div class="mainPane">
+			<div class="leftPane">
+
+				<div class="containerKey">
+					<div ng-repeat="filterKey in filterKeys"> 
+						<div class="colorKey" style="padding-bottom:5px;">
+							<div class="colorBox" style="background-color:{{filterKey.color}}; color:{{filterKey.contentColor}};">{{filterKey.content}}</div>
+							<div>{{filterKey.text}}</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="containerFilter">
+					<label ng-repeat="filterOption in filterOptions">
+						<input class="checkbox" type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id" ng-change="filterClick(filterOption.id)">{{filterOption.text}}
+						
+					</label>
+					<p>{{user.filterOptions}}</p>
 				</div>
 			</div>
-			
-			<label ng-repeat="filterOption in filterOptions">
-				<div>
-					<input type="checkbox" checklist-model="user.filterOptions" checklist-value="filterOption.id"> {{filterOption.text}} </input>
+
+			<div class="rightPane">
+				<div class="containerHeading">
+					<table>
+						<tr>
+							<td><button class="headingButton" ng-click="prev()">Previous</button></td>
+							<td><div><h3>{{heading}}</h3></div></td>
+							<td><button class="headingButton" ng-click="next()">Next</button></td>
+						</tr>
+					</table>
 				</div>
-			</label>
-	
-			<table>
-				<tr>
-					<td><button ng-click="prev()">Previous</button></td>
-					<td><div>{{heading}}</div></td>
-					<td><button ng-click="next()">Next</button></td>
-				</tr>
-			</table>
-			<div directive>{{heading}}</div>
+				<div class="containerCalendar">
+					<div directive data-ng-init="init()"></div>
+				</div>
+			</div>
 		</div>
+
+
 
 	</body>
 </html>
